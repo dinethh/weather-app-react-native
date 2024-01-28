@@ -6,36 +6,40 @@
  * @format
  */
 
-import React from 'react';
-import { StyleSheet,
-  Text,
-  View,
-  ImageBackground,
-  TextInput,
-  ActivityIndicator,
-} from "react-native";
+import React, { useState } from "react";
+import { ImageBackground, StyleSheet, TextInput, View } from "react-native";
 
 
+function App() {
+  const [input, setInput] = useState("");
+  const [loading, setLoading] = useState("");
+  const [data, setData] = useState([]);
 
-function App(){
-  return (
-    <View style={styles.root}>
-   <ImageBackground source={require('./assects/bg.jpg')}
-   resizeMode={'cover'} style={styles.image}>
+  return (<View style={styles.root}>
+      <ImageBackground source={require("./assects/bg.jpg")}
+                       resizeMode={"cover"} style={styles.image}>
+        <View>
+          <TextInput placeholder={"Enter City"}
+                     onChange={text => {
+                       setInput(text);
+                     }}
+                     value={input}
+                     placeholderTextColor={"#000"}
+                     style={styles.textInput}
+                     onSubmit={{ fetchDataHandler }}
+          ></TextInput>
 
-   </ImageBackground>
-    </View>
-  );
+        </View>
+      </ImageBackground>
+    </View>);
 }
 
 const styles = StyleSheet.create({
-  root:{
-    flex:1,
+  root: {
+    flex: 1,
+  }, image: {
+    flex: 1, flexDirection: "column",
   },
-  image:{
-    flex:1,
-    flexDirection:"column",
-  }
 });
 
 export default App;
